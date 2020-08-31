@@ -1,28 +1,24 @@
 # -*- coding: utf-8 -*-
+import collections
+
 N = int(input())
 
 all_str = []
 for i in range(N):
     str_temp = input()
     all_str.append(str_temp)
-
-unique_str = (list(set(all_str)))
-unique_str.sort()
-max_cnt = 0
-str_num = dict()
-for i in unique_str:
-    cnt = all_str.count(i)
-    str_num[i] = cnt
-    if max_cnt < cnt:
-        max_cnt = cnt
-
-disp_list = []
-for i in str_num:
-    current_cnt = str_num[i]
-    if current_cnt == max_cnt:    
-        disp_list.append(i)
+all_str.sort()
+coll_str = (collections.Counter(all_str))
+count_max = 0
+j = 0
+max_str = coll_str.most_common()
+for i in max_str:
     
-
-for i in disp_list:
-    print(i)
-    
+    num_of_str =  i[1]
+    if num_of_str == count_max or j == 0:
+        print(i[0])
+        j = 1
+        count_max = num_of_str
+        
+    if num_of_str < count_max:
+        break
